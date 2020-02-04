@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # This script creates shell scripts that simulate adding all of the WiX binaries
 # to the PATH. `wine /home/wine/wix/light.exe will be able to be called with
