@@ -1,17 +1,34 @@
 FROM i386/alpine:3.11.3
 MAINTAINER Zach Wasserman <zach@dactiv.llc>
 
+ARG wine_uid
+ARG wine_gid
+
 # Wine 32Bit for running EXE
 RUN apk add --no-cache wine=4.0.3-r0 freetype=2.10.1-r1 wget \
 # Create a separate user for Wine
-	&& addgroup --system wine \
-	&& adduser \
+	&& if [ -n "${wine_gid}" ] ; \
+    then addgroup --system wine -g ${wine_gid} ; \
+    else addgroup --system wine ; fi \
+	&& if [ -n "${wine_uid}" ] ; \
+    then \
+    adduser \
 	--home /home/wine \
 	--disabled-password \
 	--shell /bin/bash \
 	--gecos "non-root user for Wine" \
 	--ingroup wine \
-	wine \
+    --u ${wine_uid} \
+	wine ; \
+    else \
+    adduser \
+	--home /home/wine \
+	--disabled-password \
+	--shell /bin/bash \
+	--gecos "non-root user for Wine" \
+	--ingroup wine \
+	wine ;\
+    fi \
 	&& mkdir /wix \
 	&& chown wine:wine /wix
 
