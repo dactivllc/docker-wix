@@ -2,7 +2,7 @@ FROM i386/alpine:3.11.3
 MAINTAINER Zach Wasserman <zach@dactiv.llc>
 
 # Wine 32Bit for running EXE
-RUN apk add --no-cache wine=4.0.3-r0 freetype=2.10.1-r0 wget \
+RUN apk add --no-cache wine=4.0.3-r0 freetype=2.10.1-r1 wget \
 # Create a separate user for Wine
 	&& addgroup --system wine \
 	&& adduser \
