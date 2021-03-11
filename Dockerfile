@@ -1,11 +1,11 @@
-FROM i386/alpine:3.11.3
+FROM i386/alpine:3.13.2
 MAINTAINER Zach Wasserman <zach@dactiv.llc>
 
 ARG wine_uid
 ARG wine_gid
 
 # Wine 32Bit for running EXE
-RUN apk add --no-cache wine=4.0.3-r0 freetype=2.10.1-r1 wget \
+RUN apk add --no-cache wine=4.0.3-r0 freetype=2.10.4-r1 wget \
 # Create a separate user for Wine
     && if [ -n "${wine_gid}" ] ; \
     then addgroup --system wine -g ${wine_gid} ; \
@@ -41,7 +41,7 @@ COPY make-aliases.sh /home/wine/make-aliases.sh
 
 # Install .NET framework and WiX Toolset binaries
 RUN wine wineboot && \
-    wget https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-4.9.4.msi -nv -O mono.msi \
+    wget https://dl.winehq.org/wine/wine-mono/6.0.0/wine-mono-6.0.0-x86.msi -nv -O mono.msi \
     && wine msiexec /i mono.msi \
     && rm -f mono.msi \
     && wget https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311-binaries.zip -nv -O wix.zip \
