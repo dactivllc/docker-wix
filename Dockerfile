@@ -49,6 +49,7 @@ RUN wine wineboot && \
     && unzip wix.zip -d wix \
     && rm -f wix.zip \
     && /home/wine/make-aliases.sh \
-    && rm -f /home/wine/make-aliases.sh
+    && rm -f /home/wine/make-aliases.sh \
+    && mkdir $WINEPREFIX/drive_c/temp
 
 WORKDIR /wix
