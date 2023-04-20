@@ -12,7 +12,7 @@ for exe in $(ls /home/wine/wix | grep .exe$); do
 
     cat > $binpath/$name << EOF
 #!/bin/sh
-wine /home/wine/wix/$exe \$@
+wine /home/wine/wix/$exe "\$@"
 EOF
     chmod +x $binpath/$name
 done
